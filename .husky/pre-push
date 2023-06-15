@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Current working directory, should be igx-platform root dir
+CWD=$(pwd);
+echo "Running pre-push script in: $CWD"
+
+# Make this script fail when any of subsequent commands fails.
+set -e;
+
+echo "Lint Typescript with npm run lint";
+cd "$CWD/store" && npm run lint;
+
+echo "Check for unused code & exports in Typescript with npm run ts-prune"; 
+cd "$CWD/ui" && npm run ts-prune;
+
+echo -e "\nScript ran for $(($SECONDS / 60)) minutes and $(($SECONDS % 60)) seconds.\n";

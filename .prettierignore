@@ -1,0 +1,5 @@
+# The slash at the end ensures that we ignore it also if it's a subdirectory
+.github
+.vscode
+node_modules/
+package-lock.json

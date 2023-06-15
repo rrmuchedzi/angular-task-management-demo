@@ -1,0 +1,29 @@
+{
+    "name": "task-management",
+    "version": "1.0.0",
+    "description": "Task Management Demo",
+    "author": "Rickson Muchedzi",
+    "scripts": {
+        "prettier": "$(npm bin)/prettier --write \"**/*.{ts,tsx}\"",
+        "prettier-check": "npx prettier@2.5.0 --check \"**/*.{ts,tsx}\"",
+        "prepare": "husky install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:rrmuchedzi/angular-task-management-demo.git"
+    },
+    "bugs": {
+        "url": "https://github.com/rrmuchedzi/angular-task-management-demo"
+    },
+    "homepage": "https://github.com/rrmuchedzi/angular-task-management-demo#readme",
+    "devDependencies": {
+        "husky": "7.0.4",
+        "prettier": "2.5.0",
+        "pretty-quick": "3.1.2"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    }
+}
