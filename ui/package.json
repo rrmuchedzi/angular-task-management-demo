@@ -9,7 +9,7 @@
     "type": "$(npm bin)/tsc --noEmit --skipLibCheck",
     "lint": "$(npm bin)/eslint -c .eslintrc.js --ext .ts,.tsx src",
     "lint-fix": "$(npm bin)/eslint -c .eslintrc.js --ext .ts,.tsx src --fix",
-    "ts-prune": "$(npm bin)/ts-prune -e -i '.*/api/.*|.*.stories.tsx|.storybook/.*|src/style/colors.ts'"
+    "ts-prune": "$(npm bin)/ts-prune -e -i '.*/api/.*"
   },
   "private": true,
   "dependencies": {
