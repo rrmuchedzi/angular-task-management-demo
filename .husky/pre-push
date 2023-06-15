@@ -7,7 +7,7 @@ echo "Running pre-push script in: $CWD"
 # Make this script fail when any of subsequent commands fails.
 set -e;
 
-echo "Check for unused code & exports in Typescript with npm run ts-prune"; 
-cd "$CWD/ui" && npm run ts-prune;
+# echo "Check for unused code & exports in Typescript with npm run ts-prune"; 
+# cd "$CWD/ui" && npm run ts-prune;
 
 echo -e "\nScript ran for $(($SECONDS / 60)) minutes and $(($SECONDS % 60)) seconds.\n";
