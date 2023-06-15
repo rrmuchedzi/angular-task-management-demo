@@ -1,0 +1,8 @@
+<div class="checkbox-container" [ngClass]="{ 'checked-checkbox': checked }" (click)="handleCheckboxChangeRequest()">
+    <ng-container *ngIf="checked; else show_unchecked">
+        <app-tabler-icon-renderer selector="square-check"></app-tabler-icon-renderer>
+    </ng-container>
+    <ng-template #show_unchecked>
+        <app-tabler-icon-renderer selector="square"></app-tabler-icon-renderer>
+    </ng-template>
+</div>
