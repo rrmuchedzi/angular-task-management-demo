@@ -5,8 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "$(npm bin)/jest",
+    "type": "$(npm bin)/tsc --noEmit --skipLibCheck",
+    "lint": "$(npm bin)/eslint -c .eslintrc.js --ext .ts,.tsx src",
+    "lint-fix": "$(npm bin)/eslint -c .eslintrc.js --ext .ts,.tsx src --fix",
+    "ts-prune": "$(npm bin)/ts-prune -e -i '.*/api/.*|.*.stories.tsx|.storybook/.*|src/style/colors.ts'"
   },
   "private": true,
   "dependencies": {
