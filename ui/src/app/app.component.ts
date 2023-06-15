@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Renderer2 } from '@angular/core';
+import { PlatformServices } from './services/platform.service';
+import { DOCUMENT } from '@angular/common';
+import { PlatformTheme } from './types';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ui';
+  constructor(
+    private _renderer: Renderer2,
+    private _platform: PlatformServices,
+    @Inject(DOCUMENT) private _document: Document,
+  ) { }
+
+  ngOnInit(): void {
+    this._initPlatformTheme();
+    // TODO: Enable session validity when auth is ready.
+    // this._auth.verifySessionValidity();
+  }
+
+  private _initPlatformTheme() {
+    this._renderer.addClass(
+      this._document.body,
+      this._platform.platformTheme,
+    );
+  }
 }

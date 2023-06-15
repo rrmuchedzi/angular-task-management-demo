@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'variables.scss' as base;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-size: 16px;
+    overflow: hidden;
+    position: relative;
+    color: var(--text-primary-color);
+    font-weight: base.$normal-typeface;
+    text-rendering: optimizeLegibility;
+    font-family: base.$general-typeface;
+    background: var(--background-secondary-color);
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}

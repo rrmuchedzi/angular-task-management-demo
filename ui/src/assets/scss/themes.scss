@@ -1,0 +1,58 @@
+/*
+ * Copyright (C) 2023 TASKY - All Rights Reserved
+ *
+ * Authors:
+ * Rickson Muchedzi - https://muchedzi.com
+ *
+ * Shared Tasky platform dark and light themes.
+ */
+
+.tasky-common-theme-colors {
+    --brand-dark-color: #0e1015;
+    --brand-white-color: #ffffff;
+    --brand-primary-color: #2f80ed;
+    --brand-secondary-color: #2c3d8f;
+    --success-special-color: #e1f396;
+    --brand-dark-green-color: #01575c;
+    --container-tag-background-color: #ed4c67;
+}
+
+.tasky-light-theme {
+    --text-primary-color: #0e1015;
+    --text-secondary-color: #636d7e;
+    --border-primary-color: #e6e9ef;
+    --border-secondary-color: #f3f3f4;
+    --background-primary-color: #ffffff;
+    --background-secondary-color: #f5f7fe;
+    --background-highlight-color: #f4f5f8;
+    --background-brand-highlight-color: #eff6ff;
+    --success-primary-color: #52b043;
+    --success-secondary-color: #a6f4c5;
+    --success-highlight-color: #f5fcf9;
+    --error-primary-color: #dc3545;
+    --error-highlight-color: #fff6f4;
+    --priority-primary-color: #ffc960;
+    --error-highlight-color: #fff9ec;
+    --lazy-loader-color: rgba(255, 255, 255, 0.6);
+    @extend .tasky-common-theme-colors;
+}
+
+.tasky-dark-theme {
+    --text-primary-color: #ffffff;
+    --text-secondary-color: #b3becc;
+    --border-primary-color: #21232c;
+    --border-secondary-color: #242630;
+    --background-primary-color: #15171f;
+    --background-secondary-color: #1a1d27;
+    --background-highlight-color: #2c2e38;
+    --background-brand-highlight-color: #2d3041;
+    --success-primary-color: #52b043;
+    --success-secondary-color: #a6f4c5;
+    --success-highlight-color: #f5fcf9;
+    --error-primary-color: #dc3545;
+    --error-highlight-color: #fff6f4;
+    --priority-primary-color: #ffc960;
+    --error-highlight-color: #fff9ec;
+    --lazy-loader-color: rgba(21, 23, 31, 0.6);
+    @extend .tasky-common-theme-colors;
+}

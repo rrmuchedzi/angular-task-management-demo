@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap');
+
+$heavy-typeface: 800;
+$strong-typeface: 600;
+$medium-typeface: 500;
+$normal-typeface: 400;
+$general-typeface: 'Inter', sans-serif;
+
+@mixin flexContainer($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
