@@ -27,6 +27,26 @@ li {
     list-style: none;
 }
 
+app-tabler-icon-renderer {
+    position: relative;
+    color: currentColor;
+
+    &,
+    i-tabler {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    i-tabler {
+        &,
+        svg {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+}
+
 .container {
     margin: auto;
     padding: 0 30px;

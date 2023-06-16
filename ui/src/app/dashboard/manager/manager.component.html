@@ -1,1 +1,45 @@
-<p>manager works!</p>
+<div class="task-manager-container">
+    <div class="task-manager-content">
+        <div class="task-manager-table">
+            <div class="task-table-header">
+                <div class="task-table-header-cell cell-title">
+                    3 Tasks
+                </div>
+                <div class="task-table-header-cell cell-option">
+                    Priority
+                </div>
+                <div class="task-table-header-cell cell-option">
+                    Status
+                </div>
+                <div class="task-table-header-cell cell-option">
+                    edit
+                </div>
+            </div>
+        </div>
+
+        <div class="task-table-body">
+            <ul class="task-table-entries">
+                <li class="task-entry">
+                    <div class="task-table-entry-cell cell-title">
+                        <div class="task-manager-checkbox">
+                            <app-tabler-icon-renderer selector="square"></app-tabler-icon-renderer>
+                        </div>
+                        <div class="task-manager-title">
+                            Task title number here.
+                        </div>
+                    </div>
+
+                    <div class="task-table-entry-cell cell-option">
+                        <app-tabler-icon-renderer selector="flag-3"></app-tabler-icon-renderer>
+                    </div>
+                    <div class="task-table-entry-cell cell-option">
+                        In Progress
+                    </div>
+                    <div class="task-table-entry-cell cell-option">
+                        <app-tabler-icon-renderer selector="pencil"></app-tabler-icon-renderer>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

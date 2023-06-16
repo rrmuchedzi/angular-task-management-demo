@@ -1,0 +1,46 @@
+{
+    "name": "tasky-api",
+    "version": "1.0.0",
+    "description": "The tasky-api is a shared dependency of tasky-server, and tasky-ui",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "ts-node --files  ./build.ts",
+        "type": "$(npm bin)/tsc --noEmit --skipLibCheck",
+        "lint": "$(npm bin)/eslint -c .eslintrc.js --ext .ts,.tsx .",
+        "lint-fix": "$(npm bin)/eslint -c .eslintrc.js --ext .ts,.tsx . --fix",
+        "test": "NODE_ENV=test $(npm bin)/jest --detectOpenHandles --forceExit",
+        "ts-prune": "$(npm bin)/ts-prune -e -i '.*/ui/.*/server/'"
+    },
+    "author": {
+        "name": "Rickson Muchedzi",
+        "email": "rrmuchedzi@gmail.com"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "express": "4.17.1",
+        "path": "0.12.7",
+        "runtypes": "^6.6.0",
+        "serialize-error": "6.0.0",
+        "ts-node": "10.4.0",
+        "tslib": "2.3.1",
+        "winston": "^3.9.0"
+    },
+    "devDependencies": {
+        "@types/express": "4.17.13",
+        "@types/express-serve-static-core": "4.17.5",
+        "@types/fs-extra": "^9.0.13",
+        "@types/node": "^14",
+        "@typescript-eslint/eslint-plugin": "5.3.0",
+        "@typescript-eslint/parser": "5.3.0",
+        "eslint": "8.10.0",
+        "eslint-plugin-header": "3.1.1",
+        "eslint-plugin-import": "2.25.4",
+        "eslint-plugin-jsdoc": "37.9.7",
+        "eslint-plugin-unused-imports": "2.0.0",
+        "fs-extra": "^10.1.0",
+        "ts-prune": "0.10.3",
+        "typescript": "4.6.2"
+    }
+}

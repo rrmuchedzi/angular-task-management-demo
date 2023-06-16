@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "outDir": "dist",
+        "target": "esnext",
+        "module": "commonjs",
+        "jsx": "react",
+        "strict": true,
+        "sourceMap": true,
+        "lib": ["es2015", "es2017", "dom", "es2019"],
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "strictPropertyInitialization": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "downlevelIteration": true
+    },
+    "exclude": ["**/node_modules", "**/.*/", "dist"],
+    "include": [
+        "index.ts",
+        "config/**/*",
+        "utils/**/*",
+        "tools/**/*",
+        "types/**/*",
+        "endpoints/**/*",
+        "constants/**/*",
+        "../server/**/*",
+        "../ui/**/*"
+    ]
+}
