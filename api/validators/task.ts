@@ -2,7 +2,7 @@
  * Copyright (C) 2023 TASKY - All Rights Reserved
  *
  * Authors:
- * Rickson Muchedzi - rrmuchedzi@gmail.com
+ * Rickson Muchedzi - https://muchedzi.com
  */
 
 import { TASK_POINTS_LIMIT, TASK_TITLE_LIMIT } from "../constants";

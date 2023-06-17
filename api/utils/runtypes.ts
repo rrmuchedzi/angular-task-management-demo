@@ -2,7 +2,7 @@
  * Copyright (C) 2023 TASKY - All Rights Reserved
  *
  * Authors:
- * Rickson Muchedzi - rrmuchedzi@gmail.com
+ * Rickson Muchedzi - https://muchedzi.com
  */
 
 import * as r from 'runtypes';

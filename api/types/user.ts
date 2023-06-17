@@ -2,16 +2,16 @@
  * Copyright (C) 2023 TASKY - All Rights Reserved
  *
  * Authors:
- * Rickson Muchedzi - rrmuchedzi@gmail.com
+ * Rickson Muchedzi - https://muchedzi.com
  */
 
 import * as r from 'runtypes';
-import { IdEntitySchema, UserNameSchema } from '.';
+import { IdEntitySchema, TimestampSchema, UserNameSchema } from '.';
 import { validateEmailAddress } from '../validators';
 import { OrganizationResourceSchema } from './organization';
 
 export const UserSchema = r.Record({
-    fullname: UserNameSchema,
+    name: UserNameSchema,
     email: r.String.withConstraint(validateEmailAddress),
 });
 export type User = r.Static<typeof UserSchema>;
@@ -22,7 +22,7 @@ export const UserPasswordSchema = r.Record({
 
 export const UserResourceSchema = r.Record({
     organizations: r.Array(OrganizationResourceSchema)
-}).extend(IdEntitySchema.fields);
+}).extend(UserSchema.fields).extend(IdEntitySchema.fields).extend(TimestampSchema.fields);
 export type UserResource = r.Static<typeof UserResourceSchema>;
 
 export const UpdateNewsletterSubscriptionSchema = r.Record({

@@ -2,7 +2,7 @@
  * Copyright (C) 2023 TASKY - All Rights Reserved
  *
  * Authors:
- * Rickson Muchedzi - rrmuchedzi@gmail.com
+ * Rickson Muchedzi - https://muchedzi.com
  */
 
 import * as r from 'runtypes';
@@ -18,3 +18,8 @@ export const ResourceIdentificationSchema = r.String.withConstraint(validateReso
 
 export const IdEntitySchema = r.Record({ _id: ResourceIdentificationSchema });
 export type IdEntity = r.Static<typeof IdEntitySchema>;
+
+export const CreatedAtTimestampSchema = r.Record({ createdAt: r.Number });
+
+export const TimestampSchema = r.Record({ updatedAt: r.Number }).extend(CreatedAtTimestampSchema.fields);
+export type TimeStamps = r.Static<typeof TimestampSchema>;
