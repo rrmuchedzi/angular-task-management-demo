@@ -1,0 +1,58 @@
+@use 'variables.scss' as base;
+
+.page-creator-container {
+    width: 480px;
+    height: 660px;
+    overflow: hidden;
+
+    &.mini-creator-container {
+        width: 440px;
+        height: fit-content;
+        position: relative;
+    }
+
+    .page-creator-content {
+        padding: 30px;
+        overflow-y: auto;
+        position: relative;
+        height: calc(100% - 60px);
+
+        .page-creator-menu {
+            position: relative;
+            @include base.flexContainer(row, flex-end, center);
+        }
+    }
+}
+
+@media (max-height: 660px) and (min-width: 480px) {
+    .page-creator-container {
+        height: 540px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-creator-container {
+        width: 100%;
+        min-width: 100vw;
+        height: calc(var(--vh, 1vh) * 100);
+
+        &.mini-creator-container {
+            width: 100%;
+        }
+
+        .page-creator-container {
+            width: 100%;
+            min-width: 100vw;
+            height: calc(var(--vh, 1vh) * 100);
+    
+            &.mini-creator-container {
+                width: 100%;
+            }
+    
+            .page-creator-content {
+                height: calc(100% - 60px);
+                padding: 30px 20px 60px 20px;
+            }
+        }
+    }
+}

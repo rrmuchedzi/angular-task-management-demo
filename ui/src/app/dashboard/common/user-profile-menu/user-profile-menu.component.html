@@ -1,0 +1,36 @@
+<button class="profile-avatar" #userSettingsMenuTrigger="matMenuTrigger" [matMenuTriggerFor]="profileMenu"
+    [ngClass]="{ 'active-profile': isProfileOpen }">
+    <div class="user-avatar color-avatar">
+        {{ userNameInitials }}
+    </div>
+</button>
+
+<mat-menu yPosition="below" xPosition="before" #profileMenu="matMenu" backdropClass="drop-menu-backdrop"
+    (isOpen)="toggleIsProfileOpen(true)" (isClosed)="toggleIsProfileOpen(false)">
+    <div class="profile-menu-wrapper" appStopClickPropagate>
+
+        <div class="profile-menu-options">
+            <div class="profile-menu-options-header">Account</div>
+
+            <button type="button" class="profile-menu-option" (click)="onOpenAccountSettings()">
+                <app-tabler-icon-renderer selector="user"></app-tabler-icon-renderer>
+                <span>My Account</span>
+            </button>
+
+            <button type="button" class="profile-menu-option profile-menu-mobile-option"
+                (click)="onTogglePlatformTheme()">
+                <app-tabler-icon-renderer selector="moon"
+                    *ngIf="isUsingLightTheme; else light_theme_toggle_icon"></app-tabler-icon-renderer>
+                <ng-template #light_theme_toggle_icon>
+                    <app-tabler-icon-renderer selector="sun"></app-tabler-icon-renderer>
+                </ng-template>
+                <span>{{ isUsingLightTheme ? 'Switch to Dark Theme' : 'Switch to Light Theme' }}</span>
+            </button>
+
+            <button type="button" class="profile-menu-option" (click)="onLogoutHandler()">
+                <app-tabler-icon-renderer selector="logout"></app-tabler-icon-renderer>
+                <span>Logout</span>
+            </button>
+        </div>
+    </div>
+</mat-menu>

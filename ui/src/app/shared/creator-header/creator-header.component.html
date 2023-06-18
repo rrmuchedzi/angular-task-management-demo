@@ -1,0 +1,8 @@
+<div class="creator-header-container">
+    <div class="creator-header-title">
+        <ng-container *ngIf="iconSelector">
+            <app-tabler-icon-renderer [selector]="iconSelector"></app-tabler-icon-renderer>
+        </ng-container>
+        <div class="creator-title" [title]="title">{{ title }}</div>
+    </div>
+</div>

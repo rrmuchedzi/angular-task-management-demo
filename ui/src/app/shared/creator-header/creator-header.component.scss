@@ -1,0 +1,39 @@
+@use 'variables.scss' as base;
+
+.creator-header-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    height: 60px;
+    position: sticky;
+    color: var(--text-primary-color);
+    @include base.flexContainer(row, center, center);
+    background-color: var(--background-primary-color);
+    border-bottom: 1px solid var(--border-secondary-color);
+
+    .creator-header-title {
+        z-index: 20;
+    }
+
+    .creator-header-title {
+        @include base.flexContainer(row, flex-start, center);
+        .creator-title {
+            font-size: 14px;
+            max-width: 240px;
+            overflow: hidden;
+            line-height: 20px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-transform: capitalize;
+            font-weight: base.$strong-typeface;
+        }
+
+        app-tabler-icon-renderer {
+            width: 18px;
+            height: 18px;
+            margin-right: 4px;
+            color: var(--text-secondary-color);
+        }
+    }
+}

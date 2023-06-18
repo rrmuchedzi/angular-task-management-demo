@@ -23,7 +23,7 @@ export class StorageServices {
 
     getPlatformThemeData() {
         const savedTheme = localStorage.getItem(this._platformThemePersistedData) as PlatformTheme;
-        return savedTheme || PlatformTheme.Light;
+        return (savedTheme && savedTheme in PlatformTheme) ? savedTheme : PlatformTheme.Light;
     }
 
     clearBrowserData() {

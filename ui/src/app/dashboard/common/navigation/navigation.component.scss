@@ -1,0 +1,56 @@
+@use 'variables.scss' as base;
+
+.dashboard-nav {
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    background: var(--background-primary-color);
+    border-bottom: 1px solid var(--border-primary-color);
+
+    .dashboard-nav-wrapper {
+        height: 80px;
+        margin: auto;
+        @include base.flexContainer(row, flex-start, center);
+    }
+
+    .dashboard-nav-logo {
+        img {
+            width: auto;
+            height: 36px;
+        }
+
+        margin-right: 30px;
+        position: relative;
+    }
+
+    .dashboard-nav-menus a {
+        font-size: 14px;
+        padding: 0 10px;
+        transition: color .25s;
+        color: var(--text-secondary-color);
+        font-weight: base.$medium-typeface;
+
+        &.selected-menu {
+            color: var(--text-primary-color);
+        }
+
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+
+    .dashboard-nav-options {
+        margin-left: auto;
+        position: relative;
+        @include base.flexContainer(row, flex-start, center);
+    }
+
+    .dashboard-nav-option-cell {
+        position: relative;
+        &:not(:last-child) {
+            margin-right: 16px;
+        }
+    }
+}

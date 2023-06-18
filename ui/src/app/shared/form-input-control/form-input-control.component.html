@@ -1,0 +1,44 @@
+<div class="form-control-container" [ngClass]="{ 'disabled-content': control === null}">
+    <div class="form-control-input" [ngClass]="{
+            'form-error': required && control.touched && control.invalid,
+            'valid-input-state': control.valid && control.dirty,
+            'lowercase-presentation': toLowerCase
+        }">
+
+        <label class="form-control-label" [for]="label">
+            <div class="label-title">{{ label }} <span class="input-required-marker" *ngIf="required">&#42;</span></div>
+            <div class="label-counter" *ngIf="maxCharacters && showCounter">
+                {{ control.value.length }} / {{ maxCharacters }}
+            </div>
+        </label>
+
+        <input [type]="type" [name]="label" max="2147483647" [value]="control.value" [formControl]="control"
+            [placeholder]="placeholder" [minlength]="minCharacters" [maxlength]="maxCharacters"
+            (focus)="controlHasFocus = true" (blur)="controlHasFocus = false" (keyup.enter)="onEnterKeyUp()"
+            *ngIf="!isTextArea" [required]="required" [title]="title" autocomplete="false" />
+
+        <textarea [name]="label" [title]="title" [value]="control.value" [formControl]="control"
+            [placeholder]="placeholder" [minlength]="minCharacters" [maxlength]="maxCharacters"
+            (focus)="controlHasFocus = true" (blur)="controlHasFocus = false" [required]="required"
+            (keyup.enter)="onEnterKeyUp()" *ngIf="isTextArea" #formInputTextArea></textarea>
+    </div>
+
+    <div class="form-control-footer" *ngIf="(description || (control.touched && control.invalid)) && !hideErrors">
+        <div class="input-description" *ngIf="description && (!control.touched || controlHasFocus || control.valid)">
+            {{ description }}
+        </div>
+        <div class="input-error animate__animated animate__fadeIn"
+            *ngIf="control.invalid && control.touched && !controlHasFocus">
+            <span *ngIf="control.errors?.['required']">{{ label }} is required</span>
+            <span *ngIf="control.errors?.['minlength']">
+                {{ label }} must be at least {{ minCharacters }} characters long.
+            </span>
+            <span *ngIf="control.errors?.['maxlength']">
+                {{ label }} must be less than {{ maxCharacters }} characters long.
+            </span>
+            <span *ngIf="isControlRequiredAndDirty && control.errors?.['email'] && !control.errors?.['required']">
+                Please enter a valid email address
+            </span>
+        </div>
+    </div>
+</div>

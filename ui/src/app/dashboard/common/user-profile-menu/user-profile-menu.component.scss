@@ -1,0 +1,169 @@
+@use 'variables.scss' as base;
+
+.profile-avatar {
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid var(--text-secondary-color);
+
+    .user-username {
+        color: var(--text-secondary-color);
+    }
+
+    svg {
+        fill: var(--text-secondary-color);
+    }
+
+    &.active-profile,
+    &:hover {
+        border-color: var(--brand-primary-color);
+    }
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    cursor: pointer;
+    color: #ffffff;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.25s;
+    background: var(--brand-primary-color);
+    border: 2px solid var(--background-primary-color);
+    @include base.flexContainer(row, center, center);
+
+}
+
+.profile-menu-wrapper {
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    padding-bottom: 16px;
+    background: var(--background-primary-color);
+    box-shadow: rgb(0 0 0 / 4%) 0px 8px 16px, rgb(0 0 0 / 8%) 0px 4px 8px;
+
+    .user-verification-badge {
+        margin-left: auto;
+    }
+
+    .profile-menu-options {
+        position: relative;
+    }
+
+    .user-profile-details {
+        margin-left: 10px;
+        overflow: hidden;
+        width: calc(100% - 40px - 17px - 20px);
+        .user-fullname {
+            font-size: 15px;
+            font-weight: base.$strong-typeface;
+        }
+
+        .user-username {
+            font-size: 13px;
+            margin-top: 4px;
+            color: var(--text-secondary-color);
+            font-weight: base.$medium-typeface;
+        }
+
+        .user-fullname,
+        .user-username {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-wrap: break-word;
+        }
+    }
+
+    &::after {
+        content: '';
+        height: 4px;
+        width: 40%;
+        border-radius: 6px;
+        background-color: var(--border-primary-color);
+
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.profile-menu-options {
+    padding: 20px;
+    .profile-menu-options-header {
+        font-size: 0.75rem;
+        margin-bottom: 12px;
+        color: var(--text-secondary-color);
+        font-weight: base.$strong-typeface;
+    }
+
+    .profile-menu-option {
+        width: 100%;
+        height: 40px;
+        cursor: pointer;
+        padding: 0 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.25s;
+        color: var(--text-primary-color);
+        font-weight: base.$medium-typeface;
+        background-color: var(--background-primary-color);
+        border: 1px solid var(--background-highlight-color);
+        @include base.flexContainer(row, flex-start, center);
+
+        app-tabler-icon-renderer {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            transition: color 0.25s;
+            color: var(--text-secondary-color);
+        }
+
+        &.upgrade-option {
+            color: var(--brand-white-color);
+            background: var(--brand-primary-color);
+
+            app-tabler-icon-renderer {
+                color: var(--brand-white-color);
+            }
+        }
+
+        &:hover {
+            background: var(--background-secondary-color);
+            border-color: var(--brand-primary-color);
+
+            &,
+            app-tabler-icon-renderer {
+                color: var(--brand-primary-color);
+            }
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 12px;
+        }
+
+        span {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-wrap: break-word;
+
+            font-size: 90%;
+            font-weight: base.$medium-typeface;
+        }
+
+        &.profile-menu-mobile-option {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 960px) {
+    .profile-menu-options .profile-menu-option {
+        &.profile-menu-mobile-option {
+            display: flex;
+        }
+    }
+}

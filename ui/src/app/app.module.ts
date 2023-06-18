@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlatformServices } from './services/platform.service';
 import { StorageServices } from './services/storage.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthServices } from './services/auth.service';
+import { UserServices } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -12,9 +15,10 @@ import { StorageServices } from './services/storage.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
-  providers: [StorageServices, PlatformServices],
+  providers: [AuthServices, UserServices, StorageServices, PlatformServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
