@@ -13,8 +13,6 @@
         border-radius: 6px;
         transition: all 0.25s;
         background: var(--background-primary-color);
-        border: 1px solid var(--border-primary-color);
-        @include base.flexContainer(row, flex-start, center);
 
         &.lowercase-presentation {
             input {
@@ -35,7 +33,6 @@
         input {
             height: 46px;
             overflow: hidden;
-            padding: 16px 12px 12px;
             color: var(--text-primary-color);
         }
 
@@ -48,7 +45,6 @@
             overflow-x: hidden;
             position: relative;
             line-height: 1.5rem;
-            padding: 26px 15px 7px;
             color: var(--text-primary-color);
         }
 
@@ -57,7 +53,9 @@
             display: block;
             font-size: 12px;
             user-select: none;
+            margin-bottom: 4px;
             white-space: nowrap;
+            text-transform: uppercase;
             color: var(--text-secondary-color);
             font-weight: base.$medium-typeface;
 
@@ -69,7 +67,6 @@
 
             .label-counter {
                 margin-left: auto;
-                margin-right: 16px;
                 transition: color 0.25s;
 
                 &.count-limit-reached {
@@ -90,6 +87,7 @@
 
         input,
         textarea {
+            display: block;
             z-index: 50;
             width: 100%;
             border: none;
@@ -98,6 +96,8 @@
             border-radius: 6px;
             white-space: pre-wrap;
             background: transparent;
+            padding: 16px 12px 12px;
+            border: 1px solid var(--border-primary-color);
 
             &::placeholder {
                 color: var(--text-secondary-color);

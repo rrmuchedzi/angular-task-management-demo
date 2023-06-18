@@ -1,6 +1,39 @@
-<div class="page-creator-container creator-container text-creator-container">
+<div class="creator-container">
     <app-creator-header title="Create Task" iconSelector="file-plus"></app-creator-header>
 
-    <div class="page-creator-content" [ngClass]="{ 'disabled-content': isSavingResource }">
+    <div class="creator-content-wrapper" [ngClass]="{ 'disabled-content': isSavingResource }">
+        <div class="creator-content-group">
+            <div class="creator-group-cell">
+                <app-form-input-control type="text" label="Title" [required]="true" [minCharacters]="1"
+                    [control]="titleFormControl" placeholder="Enter task title"
+                    [maxCharacters]="TASK_TITLE_LIMIT"></app-form-input-control>
+            </div>
+
+            <div class="creator-group-cell">
+                <app-form-input-control type="text" label="Description" [isTextArea]="true" [required]="true"
+                    [minCharacters]="1" [control]="descriptionFormControl" placeholder="Enter task description"
+                    [maxCharacters]="TASK_DESCRIPTION_LIMIT"></app-form-input-control>
+            </div>
+
+            <div class="creator-group-cell">
+                <app-menu-selector label="Task Priority" [selected]="taskPriority" [options]="taskPriorityOptions"
+                    (selectOptionEvent)="onSetTaskPriority($event)"></app-menu-selector>
+            </div>
+
+            <div class="creator-group-cell">
+                <app-menu-selector label="Task Status" [selected]="taskStatus" [options]="taskStatusOptions"
+                    (selectOptionEvent)="onSetTaskStatus($event)"></app-menu-selector>
+            </div>
+
+            <div class="creator-group-cell">
+                <app-slider-selector label="Task Points" [value]="taskPoints"
+                    (slideValueChangeEvent)="onSetTaskPoints($event)"></app-slider-selector>
+            </div>
+        </div>
+
+        <div class="creator-content-group creator-content-footer">
+            <button type="button" class="button button-light" (click)="closeTaskCreator()">Cancel</button>
+            <button type="button" class="button button-primary" (click)="onSaveTask()">{{ inEditMode ? 'Update' : 'Save'}}</button>
+        </div>
     </div>
 </div>

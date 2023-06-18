@@ -5,7 +5,7 @@
  * Rickson Muchedzi - https://muchedzi.com
  */
 
-import { TASK_POINTS_LIMIT, TASK_TITLE_LIMIT } from "../constants";
+import { TASK_DESCRIPTION_LIMIT, TASK_POINTS_LIMIT, TASK_TITLE_LIMIT } from "../constants";
 
 export function validateTaskTitle(title: string) {
     const length = title.trim().length;
@@ -18,5 +18,5 @@ export function validateTaskPoints(points: number) {
 
 export function validateTaskDescription(description: string) {
     const length = description.trim().length;
-    return (length > 0 && length <= TASK_TITLE_LIMIT) || 'Invalid task description value.';
+    return (length > 0 && length <= TASK_DESCRIPTION_LIMIT) || 'Invalid task description value.';
 }

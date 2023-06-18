@@ -1,0 +1,32 @@
+<div class="menu-selector-container">
+    <button mat-button class="menu-selector-wrapper" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()"
+        [matMenuTriggerFor]="materialMenu">
+        <div class="menu-selector-label">
+            {{ label }}
+        </div>
+        <div class="menu-selected-option" [title]="selected">
+            <span>{{ selected ?? 'Nothing Selected' }}</span>
+            <ng-container *ngIf="isMenuOpened; else show_chevron">
+                <app-tabler-icon-renderer selector="chevron-up"></app-tabler-icon-renderer>
+            </ng-container>
+            <ng-template #show_chevron>
+                <app-tabler-icon-renderer selector="chevron-down"></app-tabler-icon-renderer>
+            </ng-template>
+        </div>
+    </button>
+    <mat-menu #materialMenu="matMenu" xPosition="before" backdropClass="menu-selector-options-wrapper">
+        <div class="menu-selector-options">
+            <button *ngFor="let option of options; let optionIndex = index" (click)="selectLinkOption(optionIndex)"
+                class="menu-selector-option" [ngClass]="{
+                    'selected-mat-menu-item': options[optionIndex] === selected,
+                    'disabled-content': disableIndexes.includes(optionIndex)
+                }" mat-menu-item>
+                <span>{{ option }}</span>
+                <div class="menu-selector-indicator">
+                    <app-tabler-icon-renderer
+                        [selector]="options[optionIndex] === selected ? 'circle-check' : 'circle-dashed'"></app-tabler-icon-renderer>
+                </div>
+            </button>
+        </div>
+    </mat-menu>
+</div>

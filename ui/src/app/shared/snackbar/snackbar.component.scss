@@ -1,0 +1,80 @@
+@use 'variables.scss' as base;
+
+.snackbar-message-container {
+    .snackbar-message-wrapper {
+        position: relative;
+        .snackbar-content {
+            @include base.flexContainer(row, flex-start, center);
+        }
+
+        .snackbar-icon {
+            display: flex;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+
+            app-tabler-icon-renderer {
+                &,
+                svg {
+                    width: 25px;
+                    height: 25px;
+                }
+
+                @include base.flexContainer(row, center, center);
+            }
+        }
+
+        &.snackbar-info {
+            .snackbar-icon {
+                color: var(--brand-primary-color);
+            }
+        }
+
+        &.snackbar-success {
+            .snackbar-icon {
+                color: var(--success-primary-color);
+            }
+        }
+
+        &.snackbar-error {
+            .snackbar-icon {
+                color: var(--error-primary-color);
+            }
+        }
+
+        .snackbar-message {
+            width: 87%;
+            margin-left: 10px;
+            padding-right: 5px;
+            margin-right: 10px;
+            .message-info {
+                max-width: 360px;
+                font-size: 0.75rem;
+                color: var(--text-primary-color);
+                line-height: 1.2rem;
+                text-justify: inter-word;
+            }
+        }
+
+        .snackbar-close-icon {
+            cursor: pointer;
+            margin-left: auto;
+            @include base.flexContainer(row, center, center);
+
+            svg {
+                color: var(--text-secondary-color);
+                transition: color 0.2s;
+
+                &:hover {
+                    color: var(--error-primary-color);
+                }
+            }
+
+            &,
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

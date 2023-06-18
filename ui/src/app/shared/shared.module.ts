@@ -9,6 +9,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonLoaderComponent } from './button-loader/button-loader.component';
 import { LoaderComponent } from './loader/loader.component';
 import { CreatorHeaderComponent } from './creator-header/creator-header.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { SliderSelectorComponent } from './slider-selector/slider-selector.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MenuSelectorComponent } from './menu-selector/menu-selector.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 const components = [
   CheckboxComponent, TablerIconRendererComponent,
@@ -16,12 +21,17 @@ const components = [
   ButtonLoaderComponent,
   LoaderComponent,
   CreatorHeaderComponent,
+  SnackbarComponent,
+  SliderSelectorComponent,
+  MenuSelectorComponent,
 ]
 
 @NgModule({
   declarations: components,
   imports: [
     CommonModule,
+    MatMenuModule,
+    MatSliderModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(icons),
   ],

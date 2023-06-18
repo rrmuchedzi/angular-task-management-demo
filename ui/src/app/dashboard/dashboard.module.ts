@@ -10,6 +10,7 @@ import { NavigationComponent } from './common/navigation/navigation.component';
 import { UserProfileMenuComponent } from './common/user-profile-menu/user-profile-menu.component';
 import { TaskEditorComponent } from './common/task-editor/task-editor.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TaskServices } from '../services/task.service';
 
 @NgModule({
   declarations: [
@@ -27,5 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     DashboardRoutingModule,
   ],
+  providers: [
+    TaskServices
+  ]
 })
 export class DashboardModule { }

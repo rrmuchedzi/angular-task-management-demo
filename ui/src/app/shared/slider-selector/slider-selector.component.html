@@ -1,0 +1,12 @@
+<div class="creator-component-title">{{ label }}</div>
+<div class="slider-selector-container">
+    <div class="slider-selector-wrapper">
+        <mat-slider [min]="min" [max]="max" [step]="step" (input)="onDrag($event)"
+            (valueChange)="handleSliderValueChangeEvent($event)">
+            <input matSliderThumb />
+        </mat-slider>
+    </div>
+    <div class="slider-selector-value">
+        {{ sliderValue }}
+    </div>
+</div>

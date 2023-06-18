@@ -1,17 +1,16 @@
 @use 'variables.scss' as base;
 
-.page-creator-container {
+.creator-container {
     width: 480px;
-    height: 660px;
+    height: fit-content;
     overflow: hidden;
 
     &.mini-creator-container {
         width: 440px;
-        height: fit-content;
         position: relative;
     }
 
-    .page-creator-content {
+    .creator-content-wrapper {
         padding: 30px;
         overflow-y: auto;
         position: relative;
@@ -25,13 +24,13 @@
 }
 
 @media (max-height: 660px) and (min-width: 480px) {
-    .page-creator-container {
+    .creator-container {
         height: 540px;
     }
 }
 
 @media (max-width: 480px) {
-    .page-creator-container {
+    .creator-container {
         width: 100%;
         min-width: 100vw;
         height: calc(var(--vh, 1vh) * 100);
@@ -40,7 +39,7 @@
             width: 100%;
         }
 
-        .page-creator-container {
+        .creator-container {
             width: 100%;
             min-width: 100vw;
             height: calc(var(--vh, 1vh) * 100);
@@ -49,7 +48,7 @@
                 width: 100%;
             }
     
-            .page-creator-content {
+            .creator-content-wrapper {
                 height: calc(100% - 60px);
                 padding: 30px 20px 60px 20px;
             }

@@ -1,0 +1,23 @@
+<div class="snackbar-message-container">
+    <div class="snackbar-message-wrapper" [ngClass]="{
+            'snackbar-info': data.type === snackbarTypes.INFO,
+            'snackbar-success': data.type === snackbarTypes.SUCCESS,
+            'snackbar-error': data.type === snackbarTypes.ERROR
+        }">
+        <div class="snackbar-content">
+            <div class="snackbar-icon" [ngSwitch]="data.type">
+                <app-tabler-icon-renderer selector="info-square-rounded" *ngSwitchCase="snackbarTypes.INFO"></app-tabler-icon-renderer>
+                <app-tabler-icon-renderer selector="check" *ngSwitchCase="snackbarTypes.SUCCESS"></app-tabler-icon-renderer>
+                <app-tabler-icon-renderer selector="alert-triangle" *ngSwitchCase="snackbarTypes.ERROR"></app-tabler-icon-renderer>
+            </div>
+            <div class="snackbar-message">
+                <div class="message-info">
+                    <span>{{ data.message }}</span>
+                </div>
+            </div>
+            <div class="snackbar-close-icon">
+                <app-tabler-icon-renderer selector="x" (click)="snackBarRef.dismiss()"></app-tabler-icon-renderer>
+            </div>
+        </div>
+    </div>
+</div>
