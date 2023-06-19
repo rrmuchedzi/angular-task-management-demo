@@ -11,6 +11,17 @@ import { Subject } from 'rxjs';
 import { UserServices } from './user.service';
 import { StorageServices } from './storage.service';
 import { Location } from '@angular/common';
+import { AuthServiceEvents, SnackbarTypes } from '../types';
+import { LoginRequest, RegisterUser } from '../../../../api/types/auth';
+import { SnackbarService } from './snackbar.service';
+import { NavigationService } from './navigation.service';
+import { DashboardRoutes } from '../dashboard/dashboard.routes';
+import { FetchError, endpointFetch } from '../tools/fetch';
+import { LoginEndpoint, LogoutEndpoint, RegisterEndpoint, VerifySessionEndpoint } from '../../../../api/endpoints/auth';
+import { AUTH_MANAGER_PATH } from '../../../../api/endpoints';
+import { handleError } from '../tools/error';
+import { HttpStatus } from '../../../../api/utils/https';
+import { AuthRoutesMenus } from '../auth/auth.routes';
 
 export enum AuthRequestType {
     signIn = 'SIGN_IN',
@@ -30,125 +41,129 @@ export class AuthServices {
     _disableResendingCode: boolean = false;
 
     // Auth service events to track server events status.
-    // private _authServiceEvents: AuthServiceEvents = {
-    //     hasLoginEvent: false,
-    //     hasLogoutEvent: false,
-    //     hasRecoveryEvent: false,
-    //     hasOnBoardingEvent: false,
-    //     hasRegistrationEvent: false,
-    //     hasAccountVerification: false,
-    //     hasSessionVerification: false,
-    //     isResendingVerificationCode: false,
-    // };
+    private _authServiceEvents: AuthServiceEvents = {
+        hasLoginEvent: false,
+        hasLogoutEvent: false,
+        hasRegistrationEvent: false,
+        hasSessionVerification: false,
+    };
 
     constructor(
         private _router: Location,
         private _user: UserServices,
         private _storage: StorageServices,
-        // private _snackbar: SnackbarService,
-        // private _navigation: NavigationService,
-    ) {}
+        private _snackbar: SnackbarService,
+        private _navigation: NavigationService,
+    ) { }
 
-    // async onUserLogin(body: LoginRequest) {
-    //     try {
-    //         // Ensure that there is no active account login in progress.
-    //         if (this._authServiceEvents.hasLoginEvent) {
-    //             return;
-    //         }
+    async onUserLogin(body: LoginRequest) {
+        try {
+            // Ensure that there is no active account login in progress.
+            if (this._authServiceEvents.hasLoginEvent) {
+                return;
+            }
 
-    //         this._authServiceEvents.hasLoginEvent = true;
-    //         this._user.user = await endpointFetch(LoginEndpoint, { scope: AUTH_MANAGER_PATH, body });
+            this._authServiceEvents.hasLoginEvent = true;
+            this._user.user = await endpointFetch(LoginEndpoint, { scope: AUTH_MANAGER_PATH, body });
+            this._navigation.changeNavigation(DashboardRoutes.Backlog);
+        } catch (error) {
+            this._storage.clearBrowserData();
+            const { status, reason } = await handleError(error as FetchError, false);
 
-    //         this.redirectUserOnLogin();
-    //     } catch (error) {
-    //         this._storage.clearBrowserData();
-    //         const { status } = await handleError(error, false);
+            this._snackbar.showSnackBarNotification(
+                status === HttpStatus.UNAUTHORIZED
+                    ? `The login details that you've entered are incorrect. Please try again`
+                    : 'There seems to be a network connection problem or a problem on our end. Please retry, and if the problem persists, contact support.',
+                SnackbarTypes.ERROR,
+            );
+            this._authRequestSubject.next({ type: AuthRequestType.register, reason });
+        }
+        this._authServiceEvents.hasLoginEvent = false;
+    }
 
-    //         this._snackbar.showSnackBarNotification(
-    //             status === HttpStatus.UNAUTHORIZED
-    //                 ? `The login details that you've entered are incorrect. Please try again`
-    //                 : 'There seems to be a network connection problem or a problem on our end. Please retry, and if the problem persists, contact support.',
-    //             SnackbarTypes.ERROR,
-    //         );
-    //         this._authRequestSubject.next({ type: AuthRequestType.register, reason: error });
-    //     }
-    //     this._authServiceEvents.hasLoginEvent = false;
-    // }
+    async registerUser(body: RegisterUser) {
+        try {
+            // Ensure that there is no active account registration in progress.
+            if (this._authServiceEvents.hasRegistrationEvent) {
+                return;
+            }
 
-    // async registerUser(body: RegisterUser) {
-    //     try {
-    //         // Ensure that there is no active account registration in progress.
-    //         if (this._authServiceEvents.hasRegistrationEvent) {
-    //             return;
-    //         }
+            this._authServiceEvents.hasRegistrationEvent = true;
 
-    //         this._authServiceEvents.hasRegistrationEvent = true;
+            const user = await endpointFetch(RegisterEndpoint, { scope: AUTH_MANAGER_PATH, body });
 
-    //         const user = await endpointFetch(RegisterEndpoint, { scope: AUTH_MANAGER_PATH, body });
+            this._user.user = user;
+            this._navigation.changeNavigation(DashboardRoutes.Backlog);
+        } catch (error) {
+            const { reason } = await handleError(error as FetchError, false);
+            this._snackbar.showSnackBarNotification(reason, SnackbarTypes.ERROR);
+            this._authRequestSubject.next({ type: AuthRequestType.register, reason });
+        }
 
-    //         this._user.user = user;
-    //         this._navigation.changeNavigation(AuthRoutesMenus.AccountVerification);
-    //     } catch (error) {
-    //         const { reason } = await handleError(error, false);
-    //         this._snackbar.showSnackBarNotification(reason, SnackbarTypes.ERROR);
-    //         this._authRequestSubject.next({ type: AuthRequestType.register, reason: error });
-    //     }
+        this._authServiceEvents.hasRegistrationEvent = false;
+    }
 
-    //     this._authServiceEvents.hasRegistrationEvent = false;
-    // }
+    async verifySessionValidity() {
+        try {
+            // Ensure that there is no active account registration in progress.
+            // If there is no user cookie we assume the session was destroyed.
+            // We don't check with the server if that's the case.
+            if (this._authServiceEvents.hasSessionVerification) {
+                this._navigation.changeNavigation(AuthRoutesMenus.Login);
+                return;
+            }
 
-    // async verifySessionValidity() {
-    //     try {
-    //         // Ensure that there is no active account registration in progress.
-    //         // If there is no user cookie we assume the session was destroyed.
-    //         // We don't check with the server if that's the case.
-    //         if (this._authServiceEvents.hasSessionVerification || this._storage.getUserAuthData() == null) {
-    //             if (this._redirectToLoginPage) {
-    //                 this._navigation.changeNavigation(AuthRoutesMenus.Login);
-    //             }
-    //             return;
-    //         }
+            this._authServiceEvents.hasSessionVerification = true;
 
-    //         this._authServiceEvents.hasSessionVerification = true;
-
-    //         this._user.user = await endpointFetch(VerifySessionEndpoint, { scope: AUTH_MANAGER_PATH });
-    //         this._authVerificationStatusSubject.next({ status: true });
-    //     } catch (error) {
-    //         this._storage.deleteUserAuthData();
-    //         this._authVerificationStatusSubject.next({ status: false });
-    //         this.redirectUserOnLogin();
-    //     }
-    //     this._authServiceEvents.hasSessionVerification = false;
-    // }
+            this._user.user = await endpointFetch(VerifySessionEndpoint, { scope: AUTH_MANAGER_PATH });
+            this._authVerificationStatusSubject.next({ status: true });
+        } catch (error) {
+            this._storage.deleteUserAuthData();
+            this._authVerificationStatusSubject.next({ status: false });
+            this._navigation.changeNavigation(AuthRoutesMenus.Login);
+        }
+        this._authServiceEvents.hasSessionVerification = false;
+    }
 
     async userLogoutHandler() {
-        // if (this._authServiceEvents.hasLogoutEvent) {
-        //     return;
-        // }
+        if (this._authServiceEvents.hasLogoutEvent) {
+            return;
+        }
 
-        // this._authServiceEvents.hasLogoutEvent = true;
-
-        // await endpointFetch(LogoutEndpoint, { scope: AUTH_MANAGER_PATH });
+        this._authServiceEvents.hasLogoutEvent = true;
+        await endpointFetch(LogoutEndpoint, { scope: AUTH_MANAGER_PATH });
         this._storage.clearBrowserData();
     }
 
-    // get hasLoginEvent() {
-    //     return this._authServiceEvents.hasLoginEvent;
-    // }
+    get hasFetchedSavedUser() {
+        return this._user.isUserProfileReady;
+    }
 
-    // get hasRegistrationEvent() {
-    //     return this._authServiceEvents.hasRegistrationEvent;
-    // }
+    get authVerificationStatusSubject() {
+        return this._authVerificationStatusSubject;
+    }
 
-    // get hasAccountVerification() {
-    //     return this._authServiceEvents.hasAccountVerification;
-    // }
+    get hasLoginEvent() {
+        return this._authServiceEvents.hasLoginEvent;
+    }
 
-    // get hasSessionVerification() {
-    //     return this._authServiceEvents.hasSessionVerification;
-    // }
+    get hasRegistrationEvent() {
+        return this._authServiceEvents.hasRegistrationEvent;
+    }
 
-    // get isDashboardLoading() {
-    //     return this._authServiceEvents.hasLogoutEvent || this._authServiceEvents.hasLoginEvent;
-    // }
+    get hasSessionVerification() {
+        return this._authServiceEvents.hasSessionVerification;
+    }
+
+    private get _redirectToLoginPage() {
+        switch (this._router.path()) {
+            case `/${AuthRoutesMenus.Login}`:
+            case `/${AuthRoutesMenus.Register}`: {
+                return false;
+            }
+            default: {
+                return true;
+            }
+        }
+    }
 }

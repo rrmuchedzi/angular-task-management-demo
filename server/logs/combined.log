@@ -117,3 +117,16 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"[SERVER] Configuring the express server.","platform_version":"1"}
 {"level":"\u001b[32minfo\u001b[39m","message":"[ERROR HANDLER] Registering error handler.","platform_version":"1"}
 {"level":"\u001b[32minfo\u001b[39m","message":"[TASKY⚡SURGE SERVER⚡READY]: development server started at port: 3000","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[TASKY] Starting tasky server 🏁","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[DATABASE] Connecting to the database.","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[SERVER] Configuring the express server.","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[ERROR HANDLER] Registering error handler.","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[TASKY⚡SURGE SERVER⚡READY]: development server started at port: 3000","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"SIGTERM signal received","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[DATABASE] Closing database connection.","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Closing HTTP server","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[TASKY] Starting tasky server 🏁","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[DATABASE] Connecting to the database.","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[SERVER] Configuring the express server.","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[ERROR HANDLER] Registering error handler.","platform_version":"1"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[TASKY⚡SURGE SERVER⚡READY]: development server started at port: 3000","platform_version":"1"}

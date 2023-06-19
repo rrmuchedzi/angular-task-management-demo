@@ -11,6 +11,7 @@ import { UserServices } from './services/user.service';
 import { SnackbarService } from './services/snackbar.service';
 import { SharedModule } from './shared/shared.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NavigationService } from './services/navigation.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthServices, UserServices, StorageServices, SnackbarService, PlatformServices],
+  providers: [AuthServices, NavigationService, UserServices, StorageServices, SnackbarService, PlatformServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

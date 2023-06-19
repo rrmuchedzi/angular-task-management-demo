@@ -23,3 +23,15 @@ export type Task = r.Static<typeof TaskSchema>;
 
 export const TaskResourceSchema = TaskSchema.extend(IdEntitySchema.fields).extend(TimestampSchema.fields);
 export type TaskResource = r.Static<typeof TaskResourceSchema>;
+
+export const TasksCollectionSchema = r.Array(TaskResourceSchema);
+
+export const TaskStatusUpdateSchema = r.Record({
+    status: TaskStatusSchema
+});
+export type TaskStatusUpdate = r.Static<typeof TaskStatusUpdateSchema>;
+
+export const TaskPriorityUpdateSchema = r.Record({
+    priority: TaskPrioritySchema
+});
+export type TaskPriorityUpdate = r.Static<typeof TaskPriorityUpdateSchema>;

@@ -8,6 +8,7 @@ import { PlatformTheme } from '../types';
 })
 export class StorageServices {
     authVerificationSubject = new Subject();
+    private readonly _userPersistedData = 'persist-user';
     private readonly _platformThemePersistedData = 'persist-theme';
 
     constructor(private _cookieService: CookieService) { }
@@ -31,4 +32,12 @@ export class StorageServices {
         sessionStorage.clear();
         this._cookieService.deleteAll('/connect.sid');
     }
+
+    deleteUserAuthData = () => {
+        try {
+            localStorage.removeItem(this._userPersistedData);
+        } catch (error) {
+            console.error('Critical application error. Could not clear user data.',);
+        }
+    };
 }

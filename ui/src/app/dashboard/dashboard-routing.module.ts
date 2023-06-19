@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BacklogComponent } from './backlog/backlog.component';
 import { DashboardComponent } from './dashboard.component';
 import { ManagerComponent } from './manager/manager.component';
+import { AuthGuardService } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
         path: '**',
         redirectTo: ''
       },
-    ]
+    ],
+    canActivate: [AuthGuardService],
   },
 ];
 

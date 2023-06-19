@@ -22,7 +22,6 @@ export class AppComponent {
   }
 
   private _initPlatformTheme() {
-    console.log('Theme added: ', this._platform.platformTheme)
     this._renderer.addClass(
       this._document.body,
       this._platform.platformTheme,

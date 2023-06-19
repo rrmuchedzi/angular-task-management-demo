@@ -1,0 +1,27 @@
+<div class="auth-form-wrapper">
+    <div class="authentication-header">
+        <div class="auth-title margin-bottom-10">Welcome Back 😎</div>
+        <div class="auth-description">Log in to your Tasky, It's time to catch-up</div>
+    </div>
+
+    <form autocomplete="off" class="authentication-form-wrapper" [ngClass]="{ 'disabled-content': hasLoginEvent }">
+        <div class="form-control-field">
+            <app-form-input-control type="email" label="Email" [required]="true" [control]="emailFormControl"
+                placeholder="For example - john@doe.com"></app-form-input-control>
+        </div>
+
+        <div class="form-control-field">
+            <app-form-input-control type="password" label="Password" [required]="true" [control]="passwordFormControl"
+                placeholder="Enter your account password"></app-form-input-control>
+        </div>
+
+        <div class="authentication-button-wrapper">
+            <button type="button" class="button button-primary" (click)="onLoginUser()">
+                <span>{{ hasLoginEvent ? 'Please wait' : 'Log in' }}</span>
+                <ng-container *ngIf="hasLoginEvent">
+                    <app-button-loader class="animate__animated animate__fadeIn"></app-button-loader>
+                </ng-container>
+            </button>
+        </div>
+    </form>
+</div>

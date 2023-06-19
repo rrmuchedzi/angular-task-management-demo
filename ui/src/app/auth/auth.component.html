@@ -1,1 +1,16 @@
-<p>auth works!</p>
+<section class="authentication-section">
+    <div class="authentication-content-wrapper">
+        <div class="container auth-content auth-content-container">
+            <ng-container *ngIf="!hasSessionVerification; else authentication_loader">
+                <!-- <div class="auth-forms"></div> -->
+                <router-outlet> </router-outlet>
+            </ng-container>
+
+            <ng-template #authentication_loader>
+                <div class="auth-content-loader">
+                    <app-loader></app-loader>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</section>
