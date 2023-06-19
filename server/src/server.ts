@@ -8,12 +8,19 @@
 import url from 'url';
 import cors from 'cors';
 import express from 'express';
-
+import passport from 'passport';
+import connectMongo from 'connect-mongo';
+import expressSession from 'express-session';
 import { connectToDatabase } from './database';
 import { HttpStatus } from '../../api/utils/https';
 import { infoLogger } from '../../api/utils/logger';
 import { registerPlatformRoutes } from './routes';
 import { handleError } from './tools/handler';
+import { DefaultStrategy } from './passport';
+import { config } from './config';
+
+
+const MongoStore = connectMongo(expressSession);
 
 export async function boot() {
     infoLogger('[TASKY] Starting tasky server 🏁');
@@ -44,6 +51,37 @@ export async function boot() {
             credentials: true,
         }),
     );
+
+    // Enable session support
+    expressServer.use(
+        expressSession({
+            secret: config.get('session').secret,
+            resave: false,
+            saveUninitialized: true,
+            cookie: {
+                maxAge: 8.64e7,
+                sameSite: true,
+            },
+            store: new MongoStore({ mongooseConnection: mongooseClientConnection.connection }),
+        }),
+    );
+
+    // The following methods specify how our user object should be (de-)serialized
+    // These will be used to maintain persistent login sessions. More at http://www.passportjs.org/docs/downloads/html/
+    passport.serializeUser((user, done) => done(null, user._id));
+    passport.deserializeUser(async (userId: string | null, done) => {
+        if (userId == null) {
+            return done('Unauthorized user', null);
+        }
+        done(null, { _id: userId });
+    });
+
+    // Here, we register our default authentication strategy
+    passport.use(new DefaultStrategy());
+
+    // Initialize passport
+    expressServer.use(passport.initialize());
+    expressServer.use(passport.session());
 
     // Register the application routes
     registerPlatformRoutes(expressServer);

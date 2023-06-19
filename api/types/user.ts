@@ -8,7 +8,6 @@
 import * as r from 'runtypes';
 import { IdEntitySchema, TimestampSchema, UserNameSchema } from '.';
 import { validateEmailAddress } from '../validators';
-import { OrganizationResourceSchema } from './organization';
 
 export const UserSchema = r.Record({
     name: UserNameSchema,
@@ -20,9 +19,7 @@ export const UserPasswordSchema = r.Record({
     password: r.String,
 });
 
-export const UserResourceSchema = r.Record({
-    organizations: r.Array(OrganizationResourceSchema)
-}).extend(UserSchema.fields).extend(IdEntitySchema.fields).extend(TimestampSchema.fields);
+export const UserResourceSchema = UserSchema.extend(IdEntitySchema.fields).extend(TimestampSchema.fields);
 export type UserResource = r.Static<typeof UserResourceSchema>;
 
 export const UpdateNewsletterSubscriptionSchema = r.Record({

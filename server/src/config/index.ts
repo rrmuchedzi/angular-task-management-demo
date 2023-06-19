@@ -33,7 +33,15 @@ export const config = convict({
         doc: 'Tasky server service version.',
         env: 'TASKY_SERVICE_VERSION',
         format: String,
-        default: '1',
+        default: '0.1',
+    },
+    session: {
+        secret: {
+            doc: 'Session secrete key',
+            format: String,
+            default: '4da950f4002c173a2d0c8ae8ee73e34d85895868',
+            env: 'SESSION_SECRET',
+        },
     },
     winston: {
         combined: {

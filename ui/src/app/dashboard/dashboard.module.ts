@@ -11,6 +11,7 @@ import { UserProfileMenuComponent } from './common/user-profile-menu/user-profil
 import { TaskEditorComponent } from './common/task-editor/task-editor.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TaskServices } from '../services/task.service';
+import { TaskEntryCellComponent } from './common/task-entry-cell/task-entry-cell.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TaskServices } from '../services/task.service';
     ManagerComponent,
     NavigationComponent,
     UserProfileMenuComponent,
-    TaskEditorComponent
+    TaskEditorComponent,
+    TaskEntryCellComponent
   ],
   imports: [
     CommonModule,

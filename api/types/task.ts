@@ -9,7 +9,6 @@ import * as r from 'runtypes';
 import { TaskPrioritySchema, TaskStatusSchema } from '../constants/task';
 import { validateTaskDescription, validateTaskPoints, validateTaskTitle } from '../validators';
 import { IdEntitySchema, TimestampSchema } from '.';
-import { UserSchema } from './user';
 
 const TaskPointsSchema = r.Number.withConstraint(validateTaskPoints);
 
@@ -22,7 +21,5 @@ export const TaskSchema = r.Record({
 });
 export type Task = r.Static<typeof TaskSchema>;
 
-export const TaskResourceSchema = r.Record({
-    reporter: UserSchema,
-}).extend(TaskSchema.fields).extend(IdEntitySchema.fields).extend(TimestampSchema.fields);
+export const TaskResourceSchema = TaskSchema.extend(IdEntitySchema.fields).extend(TimestampSchema.fields);
 export type TaskResource = r.Static<typeof TaskResourceSchema>;

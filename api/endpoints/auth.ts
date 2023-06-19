@@ -27,3 +27,9 @@ export const LogoutEndpoint = new EndpointSync({
     method: HttpMethod.GET,
     path: '/logout',
 });
+
+export const VerifySessionEndpoint = new EndpointSync({
+    method: HttpMethod.GET,
+    path: '/verify/session',
+    responseValidator: UserResourceSchema,
+});

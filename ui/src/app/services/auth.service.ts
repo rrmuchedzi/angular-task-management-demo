@@ -1,8 +1,8 @@
 /*
- * Copyright (C) 2021 PROLYNK - All Rights Reserved
+ * Copyright (C) 2023 TASKY - All Rights Reserved
  *
  * Authors:
- * Prolynk - https://www.prolynk.net
+ * Rickson Muchedzi - https://muchedzi.com
  */
 
 import { Injectable } from '@angular/core';

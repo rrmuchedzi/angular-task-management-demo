@@ -10,12 +10,17 @@ import { EndpointSync, HttpMethod } from '../utils/endpointSync';
 
 export const CreateTaskEndpoint = new EndpointSync({
     method: HttpMethod.POST,
-    path: '/:organizationId',
+    path: '/',
     requestValidator: TaskSchema,
     responseValidator: TaskResourceSchema,
 });
 
+export const UpdateTaskEndpoint = new EndpointSync({
+    method: HttpMethod.PATCH,
+    path: '/:taskId',
+});
+
 export const DeleteTaskEndpoint = new EndpointSync({
     method: HttpMethod.DELETE,
-    path: '/:organizationId/:taskId',
+    path: '/:taskId',
 });

@@ -7,7 +7,7 @@
 
 import * as r from 'runtypes';
 import { UserSchema } from './user';
-import { EmailAddressSchema } from '.';
+import { EmailAddressSchema, UserNameSchema } from '.';
 import { validatePassword } from '../validators';
 
 export const LoginRequestSchema = r.Record({
@@ -18,6 +18,7 @@ export type LoginRequest = r.Static<typeof LoginRequestSchema>;
 
 export const RegisterUserSchema = r
     .Record({
+        name: UserNameSchema,
         password: r.String.withConstraint(validatePassword),
     })
     .extend(UserSchema.pick('email').fields);

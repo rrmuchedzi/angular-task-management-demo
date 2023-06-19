@@ -5,10 +5,11 @@
  * Rickson Muchedzi - https://muchedzi.com
  */
 
-import { DocumentType, index, modelOptions, mongoose, pre, prop, Ref, Severity } from '@typegoose/typegoose';
+import { addModelToTypegoose, buildSchema, DocumentType, index, modelOptions, mongoose, pre, prop, Ref, Severity } from '@typegoose/typegoose';
 import { UserResource, User as UserType } from '../../../api/types/user';
 import { USER_NAME_LIMIT } from '../../../api/constants';
-import { Organization, toOrganizationApiObject } from './organization';
+import { StatusError } from '../../../api/utils/error';
+import { HttpStatus } from '../../../api/utils/https';
 
 @modelOptions({
     options: {
@@ -22,9 +23,6 @@ import { Organization, toOrganizationApiObject } from './organization';
 export class User implements UserType {
     @prop({ required: true, type: String, maxlength: USER_NAME_LIMIT })
     public name: string;
-
-    @prop({ required: true, ref: () => Organization, type: () => mongoose.Schema.Types.ObjectId, default: [] })
-    public organizations: Ref<Organization, ObjectIdType>[];
 
     @prop({ required: true, unique: true })
     public email: string;
@@ -42,6 +40,9 @@ export class User implements UserType {
     public updatedAt: number;
 }
 
+const UserSchema = buildSchema(User);
+export const UserModel = addModelToTypegoose(mongoose.model('User', UserSchema), User);
+
 /**
  * Converts the provided user database document to a user api resource.
  *
@@ -54,7 +55,6 @@ export function toUserApiObject(user: DocumentType<User>): UserResource {
         _id: user._id.toString(),
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
-        organizations: user.organizations.map((organization) => toOrganizationApiObject(organization as DocumentType<Organization>))
     };
 }
 
@@ -63,4 +63,17 @@ export function toUserReporter(user: DocumentType<User>): UserType {
         name: user.name,
         email: user.email,
     };
+}
+
+
+export async function findUserOrFail(userId: ObjectIdType) {
+    const user = await UserModel.findById(userId);
+    if (user == null) {
+        throw new StatusError(
+            'This account is not available. If you think there is a problem, please try again.',
+            HttpStatus.NOT_FOUND,
+        );
+    }
+
+    return user;
 }

@@ -8,6 +8,13 @@
         @include base.flexContainer(row, flex-start, center);
     }
 
+    .task-entry {
+        height: 46px;
+        border-radius: 6px;
+        background: var(--background-primary-color);
+        border: 1px solid var(--border-primary-color);
+    }
+
     .task-table-header {
         height: 40px;
     }
@@ -40,6 +47,7 @@
     .cell-option {
         width: 140px;
         flex-shrink: 0;
+        @include base.flexContainer(row, center, center);
     }
 
     app-tabler-icon-renderer {
@@ -51,9 +59,33 @@
         margin-left: 10px;
     }
 
-    .task-entry {
-        height: 40px;
-        border-radius: 6px;
-        border: 1px solid var(--border-primary-color);
+    .task-status-pill {
+        height: 30px;
+        color: #ffffff;
+        padding: 0 12px;
+        line-height: 20px;
+        border-radius: 15px;
+        font-weight: base.$medium-typeface;
+        @include base.flexContainer(row, center, center);
+
+        &.progress {
+            background: #1e90ff;
+        }
+
+        &.todo {
+            background: #ff6348;
+        }
+
+        &.done {
+            background: #2ed573;
+        }
+    }
+
+    .edit-task-button,
+    .task-manager-checkbox {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-color: transparent;
     }
 }
