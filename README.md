@@ -31,3 +31,22 @@ This application was done as an assignment task, and the details of the task are
 - Test your implementation by adding tasks, marking them as completed, and verifying that the filtering functionality works as expected.
 
 - Note: You are free to use any suitable approach for inter-component communication and data management in your implementation.
+
+
+# Breakdown
+
+The platform has a backend and frontend. To run the app, a mongodb client is required and should be accessible at mongodb://localhost:27017. 
+
+If a different port is used, adjust the connection string in the server/src/config file and change the database -> development -> default value.
+
+To run the server, use command:
+
+```
+npm run dev
+```
+
+To run the ui, use command:
+
+```
+ng serve
+```
