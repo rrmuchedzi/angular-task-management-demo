@@ -1,18 +1,16 @@
 @use 'variables.scss' as base;
 
-.task-manager-container {
-    .task-entry,
+.task-entry {
+    height: 46px;
+    border-radius: 6px;
+    background: var(--background-primary-color);
+    border: 1px solid var(--border-primary-color);
+
+    &,
     .task-table-header {
         width: 100%;
         position: relative;
         @include base.flexContainer(row, flex-start, center);
-    }
-
-    .task-entry {
-        height: 46px;
-        border-radius: 6px;
-        background: var(--background-primary-color);
-        border: 1px solid var(--border-primary-color);
     }
 
     .task-table-header {
@@ -60,11 +58,13 @@
     }
 
     .task-status-pill {
+        font-size: 13px;
         height: 30px;
+        min-width: 80px;
         color: #ffffff;
         padding: 0 12px;
         line-height: 20px;
-        border-radius: 15px;
+        border-radius: 16px;
         font-weight: base.$medium-typeface;
         @include base.flexContainer(row, center, center);
 
@@ -87,5 +87,28 @@
         outline: none;
         cursor: pointer;
         background-color: transparent;
+    }
+
+    .task-priority {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        background: none;
+
+        &.normal {
+            color: #4b7bec;
+        }
+
+        &.high {
+            color: #fa8231;
+        }
+
+        &.urgent {
+            color: #eb3b5a;
+        }
+
+        &.low {
+            color: #20bf6b;
+        }
     }
 }

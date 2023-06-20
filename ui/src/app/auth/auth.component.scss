@@ -11,6 +11,7 @@ app-login {
 
 .auth-form-wrapper {
     padding: 30px;
+    width: 400px;
     position: relative;
     border-radius: 12px;
     background: var(--background-primary-color);
@@ -351,6 +352,17 @@ app-login {
     }
 }
 
+.authentication-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-primary-color);
+
+    a {
+        margin-left: 10px;
+        color: var(--brand-primary-color);
+    }
+}
+
 @media (max-width: 560px) {
     .authentication-nav-button-prompt {
         display: none;
@@ -385,6 +397,7 @@ app-login {
     }
 
     .auth-form-wrapper {
+        width: 400px;
         border: none;
         padding: 30px 0;
         border-radius: 0;

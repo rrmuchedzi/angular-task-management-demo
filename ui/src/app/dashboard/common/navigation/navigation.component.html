@@ -4,26 +4,12 @@
             <img src="../../../../assets/img/tasky_logo.png" alt="Tasky Logo">
         </div>
 
-        <div class="dashboard-nav-menus">
-            <a type="button" class="dashboard-nav-menu" routerLinkActive="selected-menu"
-                [routerLink]="dashboardRoutes.Board">
-                Board
-            </a>
-            <a type="button" class="dashboard-nav-menu" routerLinkActive="selected-menu"
-                [routerLink]="dashboardRoutes.Board">
-                Backlog
-            </a>
-        </div>
-
         <div class="dashboard-nav-options">
             <div class="dashboard-nav-option-cell">
                 <button type="button" class="button button-primary" (click)="onCreateTask()">
                     <app-tabler-icon-renderer selector="plus"></app-tabler-icon-renderer>
                     <span>Add Task</span>
                 </button>
-            </div>
-            <div class="dashboard-nav-option-cell">
-                <app-user-profile-menu></app-user-profile-menu>
             </div>
         </div>
     </div>

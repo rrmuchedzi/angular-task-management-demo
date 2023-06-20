@@ -1,23 +1,45 @@
 <div class="backlog-container">
-    <div class="backlog-header">
-        <span>Backlog</span>
-    </div>
     <div class="backlog-content">
-        <ul>
-            <li class="backlog-task">
-                <div class="task-checkbox">
-                    <app-tabler-icon-renderer selector="square"></app-tabler-icon-renderer>
+        <div class="header-options">
+            <div class="backlog-title">
+                <span>Tasks Backlog</span>
+            </div>
+
+            <div class="header-option-cell header-filter-wrapper" style="margin-left: auto;">
+                <app-menu-selector label="Filter Tasks" [options]="filterOptions" [selected]="selectedFilterOption"
+                    (selectOptionEvent)="handleFilterChange($event)"></app-menu-selector>
+            </div>
+        </div>
+
+        <div class="backlog-header">
+            <div class="task-manager-table">
+                <div class="task-table-header">
+                    <div class="task-table-header-cell cell-title">
+                        Showing {{tasks.length}} Task{{tasks.length !== 1 ? 's' : ''}}
+                    </div>
+                    <div class="task-table-header-cell cell-option">
+                        Priority
+                    </div>
+                    <div class="task-table-header-cell cell-option">
+                        Status
+                    </div>
+                    <div class="task-table-header-cell cell-option">
+                        edit
+                    </div>
                 </div>
-                <div class="task-title">
-                    Task title here
-                </div>
-                <div class="task-status">
-                    Task Status
-                </div>
-                <div class="task-points">
-                    5
-                </div>
-            </li>
-        </ul>
+            </div>
+        </div>
+
+        <div class="backlog-tasks">
+            <ng-container *ngFor="let task of tasks; let taskIndex = index;">
+                <app-task-entry-cell [title]="task.title" [selected]="isTaskSelected(task._id)" [status]="task.status"
+                    [priority]="task.priority" [hasEventInProgress]="hasEventInProgress(task._id)"
+                    (onEditTaskEvent)="handleEditTaskEvent(taskIndex)"
+                    (onDeleteTaskEvent)="handleDeleteTaskEvent(task._id)"
+                    (onChangeTaskStatus)="handleChangeTaskStatusEvent($event, task._id)"
+                    (onChangeTaskPriority)="handleChangeTaskPriorityEvent($event, task._id)"
+                    (onToggleTaskSelection)="handleSelectTaskEvent(task._id)"></app-task-entry-cell>
+            </ng-container>
+        </div>
     </div>
 </div>

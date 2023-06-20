@@ -7,13 +7,10 @@
 
 import * as r from 'runtypes';
 import { TaskPrioritySchema, TaskStatusSchema } from '../constants/task';
-import { validateTaskDescription, validateTaskPoints, validateTaskTitle } from '../validators';
+import { validateTaskDescription, validateTaskTitle } from '../validators';
 import { IdEntitySchema, TimestampSchema } from '.';
 
-const TaskPointsSchema = r.Number.withConstraint(validateTaskPoints);
-
 export const TaskSchema = r.Record({
-    points: TaskPointsSchema,
     status: TaskStatusSchema,
     priority: TaskPrioritySchema,
     title: r.String.withConstraint(validateTaskTitle),

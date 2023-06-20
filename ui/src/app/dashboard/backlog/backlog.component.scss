@@ -1,0 +1,59 @@
+@use 'variables.scss' as base;
+
+.backlog-container {
+    .task-table-header {
+        width: 100%;
+        position: relative;
+        @include base.flexContainer(row, flex-start, center);
+    }
+
+    .task-table-header {
+        height: 40px;
+    }
+
+    .task-table-header-cell {
+        font-size: 12px;
+        line-height: 16px;
+        position: relative;
+        text-transform: uppercase;
+        color: var(--text-secondary-color);
+    }
+
+    .cell-title {
+        width: 100%;
+        padding-left: 16px;
+        @include base.flexContainer(row, flex-start, center);
+    }
+
+    .cell-option {
+        width: 140px;
+        flex-shrink: 0;
+        @include base.flexContainer(row, center, center);
+    }
+
+    .backlog-tasks app-task-entry-cell {
+        display: block;
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
+
+    .header-options {
+        gap: 20px;
+        padding: 16px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        background: var(--background-primary-color);
+        border: 1px solid var(--border-primary-color);
+        @include base.flexContainer(row, flex-start, center);
+    }
+
+    .header-filter-wrapper {
+        width: 160px;
+    }
+
+    .backlog-title {
+        font-size: 16px;
+        font-weight: base.$medium-typeface;
+    }
+}

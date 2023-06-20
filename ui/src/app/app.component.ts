@@ -2,6 +2,7 @@ import { Component, Inject, Renderer2 } from '@angular/core';
 import { PlatformServices } from './services/platform.service';
 import { DOCUMENT } from '@angular/common';
 import { PlatformTheme } from './types';
+import { AuthServices } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { PlatformTheme } from './types';
 })
 export class AppComponent {
   constructor(
+    private _auth: AuthServices,
     private _renderer: Renderer2,
     private _platform: PlatformServices,
     @Inject(DOCUMENT) private _document: Document,
@@ -17,8 +19,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this._initPlatformTheme();
-    // TODO: Enable session validity when auth is ready.
-    // this._auth.verifySessionValidity();
+    this._auth.verifySessionValidity();
   }
 
   private _initPlatformTheme() {

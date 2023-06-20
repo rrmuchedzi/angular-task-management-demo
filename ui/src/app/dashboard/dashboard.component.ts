@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskServices } from '../services/task.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    ngOnInit(): void {
-        
-    }
+
+  constructor(private _task: TaskServices) { }
+
+  ngOnInit(): void {
+    this._task.getTasks();
+  }
 }

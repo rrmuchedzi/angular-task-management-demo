@@ -24,11 +24,6 @@
                 <app-menu-selector label="Task Status" [selected]="taskStatus" [options]="taskStatusOptions"
                     (selectOptionEvent)="onSetTaskStatus($event)"></app-menu-selector>
             </div>
-
-            <div class="creator-group-cell">
-                <app-slider-selector label="Task Points" [value]="taskPoints"
-                    (slideValueChangeEvent)="onSetTaskPoints($event)"></app-slider-selector>
-            </div>
         </div>
 
         <div class="creator-content-group creator-content-footer">

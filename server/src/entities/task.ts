@@ -24,9 +24,6 @@ export class Task implements TaskType {
     @prop({ required: true, type: String, minlength: 1, maxlength: TASK_DESCRIPTION_LIMIT })
     public description: string;
 
-    @prop({ required: true, type: Number, min: 0, max: TASK_POINTS_LIMIT })
-    public points: number;
-
     @prop({ required: true, enum: TaskStatus })
     public status: TaskStatus;
 
@@ -54,7 +51,6 @@ export const TaskModel = addModelToTypegoose(mongoose.model('Task', TaskSchema),
 export function toTaskApiObject(user: DocumentType<Task>): TaskResource {
     return {
         title: user.title,
-        points: user.points,
         status: user.status,
         priority: user.priority,
         _id: user._id.toString(),

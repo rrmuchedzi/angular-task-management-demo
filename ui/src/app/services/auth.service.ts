@@ -93,7 +93,7 @@ export class AuthServices {
             const user = await endpointFetch(RegisterEndpoint, { scope: AUTH_MANAGER_PATH, body });
 
             this._user.user = user;
-            this._navigation.changeNavigation(DashboardRoutes.Backlog);
+            this._navigation.changeNavigation(`dashboard/${DashboardRoutes.Backlog}`);
         } catch (error) {
             const { reason } = await handleError(error as FetchError, false);
             this._snackbar.showSnackBarNotification(reason, SnackbarTypes.ERROR);
@@ -117,6 +117,7 @@ export class AuthServices {
 
             this._user.user = await endpointFetch(VerifySessionEndpoint, { scope: AUTH_MANAGER_PATH });
             this._authVerificationStatusSubject.next({ status: true });
+            this._navigation.changeNavigation(`dashboard/${DashboardRoutes.Backlog}`);
         } catch (error) {
             this._storage.deleteUserAuthData();
             this._authVerificationStatusSubject.next({ status: false });

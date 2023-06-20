@@ -1,24 +1,84 @@
-<li class="task-entry">
+<li class="task-entry" [ngClass]="{'disabled-content': hasEventInProgress}">
     <div class="task-table-entry-cell cell-title">
-        <button type="button" class="task-manager-checkbox" (click)="onToggleTaskCheckbox()">
-            <app-tabler-icon-renderer selector="square"></app-tabler-icon-renderer>
-        </button>
+        <div class="task-entry-icon">
+            <ng-container *ngIf="hasEventInProgress; else show_checkbox">
+                <app-button-loader></app-button-loader>
+            </ng-container>
+
+            <ng-template #show_checkbox>
+                <button type="button" class="task-manager-checkbox" (click)="onToggleTaskCheckbox()">
+                    <ng-container *ngIf="selected; else unchecked">
+                        <app-tabler-icon-renderer selector="square-check-filled"></app-tabler-icon-renderer>
+                    </ng-container>
+
+                    <ng-template #unchecked>
+                        <app-tabler-icon-renderer selector="square"></app-tabler-icon-renderer>
+                    </ng-template>
+                </button>
+            </ng-template>
+        </div>
         <div class="task-manager-title">
-            Task title number here.
+            {{title}}
         </div>
     </div>
 
     <div class="task-table-entry-cell cell-option">
-        <app-tabler-icon-renderer selector="flag-3"></app-tabler-icon-renderer>
+        <button mat-button class="menu-selector-wrapper task-priority"
+            [ngClass]="{'normal': priority === taskPriority.Normal, 'high': priority === taskPriority.High, 'urgent': priority === taskPriority.Urgent, 'low': priority === taskPriority.Low, }"
+            [matMenuTriggerFor]="priorityMaterialMenu">
+            <app-tabler-icon-renderer selector="flag-3"></app-tabler-icon-renderer>
+        </button>
+        <mat-menu #priorityMaterialMenu="matMenu" xPosition="before" backdropClass="menu-selector-options-wrapper">
+            <div class="menu-selector-options">
+                <button *ngFor="let option of priorityOptions; let optionIndex = index"
+                    (click)="changeTaskPriority(optionIndex)" class="menu-selector-option" [ngClass]="{
+                        'selected-mat-menu-item': priority === option
+                    }" mat-menu-item>
+                    <span>{{ option }}</span>
+                    <div class="menu-selector-indicator">
+                        <ng-container *ngIf="priority === option; else unselected">
+                            <app-tabler-icon-renderer selector="circle-check-filled"></app-tabler-icon-renderer>
+                        </ng-container>
+                        <ng-template #unselected>
+                            <app-tabler-icon-renderer selector="circle"></app-tabler-icon-renderer>
+                        </ng-template>
+                    </div>
+                </button>
+            </div>
+        </mat-menu>
     </div>
     <div class="task-table-entry-cell cell-option">
-        <div class="task-status-pill progress">
-            <span>In Progress</span>
-        </div>
+
+        <button mat-button class="menu-selector-wrapper task-priority" [matMenuTriggerFor]="statusMaterialMenu">
+            <div class="task-status-pill" [ngClass]="{'todo': status === taskStatus.ToDo, 'progress': status === taskStatus.InProgress, 'done': status === taskStatus.Done, }">
+                <span>{{status}}</span>
+            </div>
+        </button>
+        <mat-menu #statusMaterialMenu="matMenu" xPosition="before" backdropClass="menu-selector-options-wrapper">
+            <div class="menu-selector-options">
+                <button *ngFor="let option of statusOptions; let optionIndex = index"
+                    (click)="changeTaskStatus(optionIndex)" class="menu-selector-option" [ngClass]="{
+                    'selected-mat-menu-item': status === option
+                }" mat-menu-item>
+                    <span>{{ option }}</span>
+                    <div class="menu-selector-indicator">
+                        <ng-container *ngIf="status === option; else unselected">
+                            <app-tabler-icon-renderer selector="circle-check-filled"></app-tabler-icon-renderer>
+                        </ng-container>
+                        <ng-template #unselected>
+                            <app-tabler-icon-renderer selector="circle"></app-tabler-icon-renderer>
+                        </ng-template>
+                    </div>
+                </button>
+            </div>
+        </mat-menu>
     </div>
     <div class="task-table-entry-cell cell-option">
         <button type="button" class="edit-task-button" (click)="onEditTask()">
             <app-tabler-icon-renderer selector="pencil"></app-tabler-icon-renderer>
+        </button>
+        <button type="button" class="edit-task-button" style="margin-left: 16px;" (click)="onDeleteTask()">
+            <app-tabler-icon-renderer selector="trash"></app-tabler-icon-renderer>
         </button>
     </div>
 </li>

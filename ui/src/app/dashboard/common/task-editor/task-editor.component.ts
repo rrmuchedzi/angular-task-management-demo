@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { v4 } from 'uuid';
 import { UntypedFormControl, Validators } from '@angular/forms';
-import { TASK_DESCRIPTION_LIMIT, TASK_TITLE_LIMIT, TaskPriority, TaskStatus } from '../../../../../../api/constants';
+import { TASK_DESCRIPTION_LIMIT, TASK_POINTS_LIMIT, TASK_TITLE_LIMIT, TaskPriority, TaskStatus } from '../../../../../../api/constants';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task, TaskResource } from '../../../../../../api/types/task';
 import { SnackbarService } from 'src/app/services/snackbar.service';
@@ -28,6 +28,8 @@ export class TaskEditorComponent implements OnInit {
   readonly TASK_TITLE_LIMIT = TASK_TITLE_LIMIT;
   readonly TASK_DESCRIPTION_LIMIT = TASK_DESCRIPTION_LIMIT;
 
+  readonly TASK_POINTS_LIMIT = TASK_POINTS_LIMIT;
+
   // Task editor subscriptions and reference.
   private readonly EDITOR_REFERENCE = v4();
   private _taskCreatorSubscription!: Subscription;
@@ -53,7 +55,7 @@ export class TaskEditorComponent implements OnInit {
       title: '',
       description: '',
       status: TaskStatus.ToDo,
-      points: 2, priority: TaskPriority.Normal,
+      priority: TaskPriority.Normal,
     }
   }
 
@@ -63,10 +65,6 @@ export class TaskEditorComponent implements OnInit {
 
   onSetTaskPriority(priority: string) {
     this._taskContent.priority = priority as TaskPriority;
-  }
-
-  onSetTaskPoints(points: number) {
-    this._taskContent.points = points;
   }
 
   closeTaskCreator() {
@@ -112,10 +110,6 @@ export class TaskEditorComponent implements OnInit {
     }
 
     this._task.createTask(task, this.EDITOR_REFERENCE);
-  }
-
-  get taskPoints() {
-    return this._taskContent.points;
   }
 
   get taskStatus() {

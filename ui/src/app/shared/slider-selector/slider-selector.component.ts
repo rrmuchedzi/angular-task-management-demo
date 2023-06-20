@@ -36,9 +36,9 @@ export class SliderSelectorComponent implements OnInit, OnChanges {
         }
     }
 
-    handleSliderValueChangeEvent(event: Event) {
+    handleSliderValueChangeEvent(value: Event) {
         // this.slideValueChangeEvent.emit(value);
-        console.log('Value change event: ', event);
+        console.log('Value change event: ', value);
     }
 
     onDrag(value: Event) {
